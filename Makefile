@@ -12,6 +12,14 @@ run: ## 애플리케이션을 로컬에서 실행합니다.
 test: ## 테스트를 실행합니다. 커버리지 포함
 	go test -v -cover ./...
 
+.PHONY: gen
+gen: ## Protobuf 코드를 생성합니다.
+	protoc --go_out=./gen/todo/v1 \
+	--go_opt=paths=source_relative \
+	--connect-go_out=./gen/todo/v1 \
+	--connect-go_opt=paths=source_relative \
+	todo.proto
+
 .PHONY: add_todo
 add_todo: ## 새로운 Todo를 추가합니다. make add_todo title='할 일 제목'
 	@if [ -z "$(title)" ]; then \
