@@ -14,9 +14,10 @@ test: ## 테스트를 실행합니다. 커버리지 포함
 
 .PHONY: gen
 gen: ## Protobuf 명세에 대한 go 코드를 생성합니다.
-	protoc --go_out=./gen/todo/v1 \
+	@mkdir -p gen/todo/v1
+	@protoc --go_out=gen/todo/v1 \
 	--go_opt=paths=source_relative \
-	--connect-go_out=./gen/todo/v1 \
+	--connect-go_out=gen/todo/v1 \
 	--connect-go_opt=paths=source_relative \
 	todo.proto
 
