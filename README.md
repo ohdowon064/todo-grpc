@@ -124,9 +124,11 @@ make gen
 또는 
 
 ```sh
-protoc --go_out=gen --go_opt=paths=source_relative \
-       --connect-go_out=gen --connect-go_opt=paths=source_relative \
-       todo.proto
+protoc --go_out=gen/todo/v1 \
+    --go_opt=paths=source_relative \
+    --connect-go_out=gen/todo/v1 \
+    --connect-go_opt=paths=source_relative \
+    todo.proto
 ```
 
 ### 예시
