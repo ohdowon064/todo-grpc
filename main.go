@@ -78,7 +78,9 @@ func main() {
 		log.Fatal(err)
 	}
 
-	db.AutoMigrate(&TodoModel{})
+	if err = db.AutoMigrate(&TodoModel{}); err != nil {
+		log.Fatal(err)
+	}
 
 	todoServer := &TodoServer{db: db}
 	mux := http.NewServeMux()
@@ -88,8 +90,11 @@ func main() {
 
 	fmt.Println("Starting server on http://localhost:8080")
 
-	http.ListenAndServe(
+	err = http.ListenAndServe(
 		":8080",
 		h2c.NewHandler(mux, &http2.Server{}),
 	)
+	if err != nil {
+		log.Fatal(err)
+	}
 }
