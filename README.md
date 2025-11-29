@@ -63,6 +63,26 @@
    go test -v -cover ./...
    ```
 
+## 실행 및 관리 명령어 (Makefile)
+
+| 명령어         | 설명                                      |
+| -------------- | ----------------------------------------- |
+| `make run`       | 서버를 로컬에서 실행합니다.                |
+| `make test`      | 테스트를 실행합니다. 커버리지 포함         |
+| `make add_todo title='할 일'` | 새로운 Todo를 추가합니다.         |
+| `make list_todos`| 모든 Todo 항목을 나열합니다.               |
+| `make help`      | 사용 가능한 명령어 목록을 표시합니다.      |
+| `make gen`      | Protobuf 명세에 대한 go 코드를 생성합니다.      |
+
+### 예시
+
+```sh
+make run
+make test
+make add_todo title="청소하기"
+make list_todos
+```
+
 ## API 명세
 
 ### TodoService
@@ -93,14 +113,26 @@
   }
   ```
 
-## 코드 생성
+## 코드 생성 (proto → Go)
 
 프로토콜 버퍼 파일(`todo.proto`)을 수정한 경우 아래 명령어로 코드를 재생성할 수 있습니다.
+
+```sh
+make gen 
+```
+
+또는 
 
 ```sh
 protoc --go_out=gen --go_opt=paths=source_relative \
        --connect-go_out=gen --connect-go_opt=paths=source_relative \
        todo.proto
+```
+
+### 예시
+
+```sh
+make gen
 ```
 
 ## 참고
